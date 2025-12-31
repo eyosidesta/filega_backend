@@ -6,6 +6,9 @@ type Country = (typeof Countries)[number];
 const Subscriptions = ['BASIC', 'PREMIUM'] as const;
 type Subscription = (typeof Subscriptions)[number];
 
+const Statuses = ['pending', 'active'] as const;
+type Status = (typeof Statuses)[number];
+
 export class CreateBusinessDto {
   @IsString()
   @IsNotEmpty()
@@ -28,6 +31,10 @@ export class CreateBusinessDto {
 
   @IsEnum(Subscriptions)
   subscription: Subscription;
+
+  @IsEnum(Statuses)
+  @IsOptional()
+  status?: Status;
 
   @IsString()
   @IsNotEmpty()
@@ -58,5 +65,6 @@ export class CreateBusinessDto {
   @IsLongitude()
   lng: number;
 }
+
 
 

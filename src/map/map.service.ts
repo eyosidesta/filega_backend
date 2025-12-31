@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, MoreThanOrEqual, LessThanOrEqual } from 'typeorm';
+import { Repository, MoreThanOrEqual, LessThanOrEqual, ILike } from 'typeorm';
 import { Business } from '../businesses/entities/business.entity';
 
 export interface BoundsQuery {
