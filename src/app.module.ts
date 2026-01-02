@@ -17,7 +17,7 @@ import { Business } from './businesses/entities/business.entity';
       type: 'postgres',
       url: process.env.DATABASE_URL,
       autoLoadEntities: true,
-      synchronize: true, // TODO: replace with migrations in prod
+      synchronize: process.env.NODE_ENV !== 'production', // disable schema sync in production
     }),
     TypeOrmModule.forFeature([Business]),
     HealthModule,

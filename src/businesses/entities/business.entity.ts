@@ -1,11 +1,4 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-  Index,
-} from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, Index } from 'typeorm';
 
 export type SubscriptionType = 'BASIC' | 'PREMIUM';
 export type BusinessStatus = 'pending' | 'active';
@@ -54,10 +47,10 @@ export class Business {
   @Column({ length: 2 })
   country: string; // CA or US
 
-  @Index({ spatial: true })
   @Column({ type: 'double precision' })
   lat: number;
 
+  @Index()
   @Column({ type: 'double precision' })
   lng: number;
 
