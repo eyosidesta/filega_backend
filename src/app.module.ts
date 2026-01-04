@@ -6,6 +6,7 @@ import { BusinessesModule } from './businesses/businesses.module';
 import { SearchModule } from './search/search.module';
 import { MapModule } from './map/map.module';
 import { Business } from './businesses/entities/business.entity';
+import { MediaModule } from './media/media.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { Business } from './businesses/entities/business.entity';
     BusinessesModule,
     SearchModule,
     MapModule,
+    MediaModule,
   ],
 })
 export class AppModule {}

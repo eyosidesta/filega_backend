@@ -54,6 +54,17 @@ export class Business {
   @Column({ type: 'double precision' })
   lng: number;
 
+  @Column({
+    type: 'geography',
+    spatialFeatureType: 'Point',
+    srid: 4326,
+    nullable: true,
+  })
+  location: any;
+
+  @Column({ type: 'boolean', default: false })
+  needsLocationReview: boolean;
+
   @CreateDateColumn()
   createdAt: Date;
 

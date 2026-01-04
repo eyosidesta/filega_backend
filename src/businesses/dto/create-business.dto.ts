@@ -1,4 +1,5 @@
-import { IsEnum, IsLatitude, IsLongitude, IsNotEmpty, IsOptional, IsString, IsUrl } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, IsUrl } from 'class-validator';
+import { Transform } from 'class-transformer';
 
 const Countries = ['CA', 'US'] as const;
 type Country = (typeof Countries)[number];
@@ -22,6 +23,7 @@ export class CreateBusinessDto {
   @IsNotEmpty()
   phone: string;
 
+  @Transform(({ value }) => (value === '' ? undefined : value))
   @IsOptional()
   @IsUrl()
   website?: string;
@@ -59,11 +61,13 @@ export class CreateBusinessDto {
   @IsEnum(Countries)
   country: Country;
 
-  @IsLatitude()
-  lat: number;
+  @IsOptional()
+  @IsNumber()
+  lat?: number;
 
-  @IsLongitude()
-  lng: number;
+  @IsOptional()
+  @IsNumber()
+  lng?: number;
 }
 
 
