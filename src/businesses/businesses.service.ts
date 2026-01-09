@@ -94,7 +94,23 @@ export class BusinessesService {
     return this.repo.find({
       where: { status: 'active' },
       order: { category: 'ASC', name: 'ASC' },
-      select: ['id', 'name', 'category', 'city', 'subscription', 'images', 'phone', 'website'],
+      select: [
+        'id',
+        'name',
+        'category',
+        'city',
+        'provinceOrState',
+        'country',
+        'subscription',
+        'images',
+        'phone',
+        'website',
+        'heroImage',
+        'email',
+        'lat',
+        'lng',
+        'status',
+      ],
     });
   }
 

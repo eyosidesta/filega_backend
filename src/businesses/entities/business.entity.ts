@@ -20,6 +20,12 @@ export class Business {
   @Column({ nullable: true })
   website?: string;
 
+  @Column({ nullable: true })
+  email?: string;
+
+  @Column({ type: 'text', nullable: true })
+  heroImage?: string;
+
   @Column('text', { array: true, default: '{}' })
   images: string[];
 

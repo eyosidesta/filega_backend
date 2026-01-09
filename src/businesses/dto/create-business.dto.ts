@@ -1,4 +1,4 @@
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, IsUrl } from 'class-validator';
+import { IsEmail, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, IsUrl } from 'class-validator';
 import { Transform } from 'class-transformer';
 
 const Countries = ['CA', 'US'] as const;
@@ -30,6 +30,16 @@ export class CreateBusinessDto {
 
   @IsOptional()
   images?: string[];
+
+  @Transform(({ value }) => (value === '' ? undefined : value))
+  @IsOptional()
+  @IsUrl()
+  heroImage?: string;
+
+  @Transform(({ value }) => (value === '' ? undefined : value))
+  @IsOptional()
+  @IsEmail()
+  email?: string;
 
   @IsEnum(Subscriptions)
   subscription: Subscription;
