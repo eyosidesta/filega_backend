@@ -78,6 +78,30 @@ export class CreateBusinessDto {
   @IsOptional()
   @IsNumber()
   lng?: number;
+
+  @IsOptional()
+  @IsString()
+  stripeCheckoutSessionId?: string;
+
+  @IsOptional()
+  @IsString()
+  stripePaymentIntentId?: string;
+
+  @IsOptional()
+  @IsNumber()
+  paidAmountCents?: number;
+
+  @IsOptional()
+  @IsString()
+  currency?: string;
+
+  @IsOptional()
+  @IsString()
+  payment_status?: 'pending_payment' | 'active' | 'rejected';
+
+  @IsOptional()
+  paidAt?: Date;
+
 }
 
 

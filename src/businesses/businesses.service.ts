@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Business } from './entities/business.entity';
 import { CreateBusinessDto } from './dto/create-business.dto';
-import { UpdateBusinessDto } from './dto/update-business.dto';
 import axios from 'axios';
 
 @Injectable()
@@ -57,6 +56,7 @@ export class BusinessesService {
       lat,
       lng,
       status: 'pending',
+      payment_status: 'pending_payment',
       needsLocationReview,
       images: dto.images || [],
     });
@@ -114,7 +114,7 @@ export class BusinessesService {
     });
   }
 
-  async update(id: string, dto: UpdateBusinessDto) {
+  async update(id: string, dto: Partial<Business>) {
     const existing = await this.findOne(id);
     const merged = this.repo.merge(existing, dto);
     return this.repo.save(merged);

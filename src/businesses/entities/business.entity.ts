@@ -76,6 +76,25 @@ export class Business {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @Column({default: 'pending_payment'})
+  payment_status: 'pending_payment' | 'active' | 'rejected';
+
+  @Column({nullable: true})
+  stripeCheckoutSessionId?: string;
+
+  @Column({nullable: true})
+  stripePaymentIntentId?: string;
+
+  @Column({nullable: true})
+  paidAmountCents?: number;
+
+  @Column({ type: 'timestamptz', nullable: true})
+  paidAt?: Date;
+
+  @Column({ nullable: true })
+  currency?: string;
+
 }
 
 
