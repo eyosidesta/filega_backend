@@ -1,4 +1,4 @@
-import { IsEmail, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, IsUrl } from 'class-validator';
+import { IsDateString, IsEmail, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString, IsUrl } from 'class-validator';
 import { Transform } from 'class-transformer';
 
 const Countries = ['CA', 'US'] as const;
@@ -7,8 +7,14 @@ type Country = (typeof Countries)[number];
 const Subscriptions = ['BASIC', 'PREMIUM'] as const;
 type Subscription = (typeof Subscriptions)[number];
 
-const Statuses = ['pending', 'active'] as const;
+const Statuses = ['pending', 'active', 'rejected', 'suspended'] as const;
 type Status = (typeof Statuses)[number];
+
+const PaymentStatuses = ['pending_payment', 'active', 'rejected', 'overdue'] as const;
+type PaymentStatus = (typeof PaymentStatuses)[number];
+
+const PaymentMethods = ['stripe', 'etransfer', 'cash', 'other'] as const;
+type PaymentMethod = (typeof PaymentMethods)[number];
 
 export class CreateBusinessDto {
   @IsString()
@@ -96,11 +102,28 @@ export class CreateBusinessDto {
   currency?: string;
 
   @IsOptional()
-  @IsString()
-  payment_status?: 'pending_payment' | 'active' | 'rejected';
+  @IsEnum(PaymentStatuses)
+  payment_status?: PaymentStatus;
 
   @IsOptional()
+  @IsEnum(PaymentMethods)
+  payment_method?: PaymentMethod;
+
+  @IsOptional()
+  @IsDateString()
   paidAt?: Date;
+
+  @IsOptional()
+  @IsDateString()
+  renewalDueAt?: Date;
+
+  @IsOptional()
+  @IsString()
+  paymentReference?: string;
+
+  @IsOptional()
+  @IsString()
+  paymentNotes?: string;
 
 }
 

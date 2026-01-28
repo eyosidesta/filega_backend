@@ -22,6 +22,7 @@ export class PaymentsController {
 
         await this.businessesService.update(businessId, {
             stripeCheckoutSessionId: session.id,
+            payment_method: 'stripe',
         });
 
         return {

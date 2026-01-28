@@ -30,14 +30,19 @@ export class StripeWebhookController {
             const session = event.data.object as Stripe.Checkout.Session;
             const businessId = session.metadata?.businessId;
             if (businessId) {
+                const paidAt = new Date();
+                const renewalDueAt = new Date(paidAt);
+                renewalDueAt.setFullYear(renewalDueAt.getFullYear() + 1);
                 await this.businessesService.update(businessId, {
                     payment_status: 'active',
+                    payment_method: 'stripe',
                     status: 'active',
                     stripeCheckoutSessionId: session.id,
                     stripePaymentIntentId: session.payment_intent?.toString(),
                     paidAmountCents: session.amount_total ?? undefined,
                     currency: session.currency ?? undefined,
-                    paidAt: new Date(),
+                    paidAt,
+                    renewalDueAt,
                 });
             }
         }

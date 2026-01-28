@@ -1,7 +1,9 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, Index } from 'typeorm';
 
 export type SubscriptionType = 'BASIC' | 'PREMIUM';
-export type BusinessStatus = 'pending' | 'active';
+export type BusinessStatus = 'pending' | 'active' | 'rejected' | 'suspended';
+export type PaymentStatus = 'pending_payment' | 'active' | 'rejected' | 'overdue';
+export type PaymentMethod = 'stripe' | 'etransfer' | 'cash' | 'other';
 
 @Entity({ name: 'businesses' })
 export class Business {
@@ -77,8 +79,11 @@ export class Business {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @Column({default: 'pending_payment'})
-  payment_status: 'pending_payment' | 'active' | 'rejected';
+  @Column({ default: 'pending_payment' })
+  payment_status: PaymentStatus;
+
+  @Column({ type: 'varchar', length: 20, nullable: true })
+  payment_method?: PaymentMethod;
 
   @Column({nullable: true})
   stripeCheckoutSessionId?: string;
@@ -94,6 +99,15 @@ export class Business {
 
   @Column({ nullable: true })
   currency?: string;
+
+  @Column({ type: 'text', nullable: true })
+  paymentReference?: string;
+
+  @Column({ type: 'text', nullable: true })
+  paymentNotes?: string;
+
+  @Column({ type: 'timestamptz', nullable: true })
+  renewalDueAt?: Date;
 
 }
 
