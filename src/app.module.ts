@@ -7,6 +7,8 @@ import { SearchModule } from './search/search.module';
 import { MapModule } from './map/map.module';
 import { Business } from './businesses/entities/business.entity';
 import { MediaModule } from './media/media.module';
+import { PaymentsModule } from './payments/payments.module';
+import { WebhooksModule } from './webhooks/webhooks.module';
 
 @Module({
   imports: [
@@ -26,6 +28,8 @@ import { MediaModule } from './media/media.module';
     SearchModule,
     MapModule,
     MediaModule,
+    PaymentsModule,
+    WebhooksModule
   ],
 })
 export class AppModule {}

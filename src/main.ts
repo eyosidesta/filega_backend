@@ -1,9 +1,15 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
+import * as bodyParser from 'body-parser';
+
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.use(
+    '/webhooks/stripe',
+    bodyParser.raw({ type: 'application/json' }),
+  );
   app.enableCors({
     origin: ['http://localhost:5173', 'https://myfilega.com', 'https://www.myfilega.com'],
     credentials: true,
