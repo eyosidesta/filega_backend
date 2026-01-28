@@ -9,6 +9,7 @@ import { Business } from './businesses/entities/business.entity';
 import { MediaModule } from './media/media.module';
 import { PaymentsModule } from './payments/payments.module';
 import { WebhooksModule } from './webhooks/webhooks.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -29,7 +30,8 @@ import { WebhooksModule } from './webhooks/webhooks.module';
     MapModule,
     MediaModule,
     PaymentsModule,
-    WebhooksModule
+    WebhooksModule,
+    AdminModule
   ],
 })
 export class AppModule {}
